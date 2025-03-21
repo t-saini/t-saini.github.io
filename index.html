@@ -20,6 +20,20 @@
         .section-heading {
             margin-bottom: 40px;
         }
+
+        /* Calendly widget fixed on the right */
+        #calendly-widget {
+            position: fixed;
+            top: 100px;
+            right: 0;
+            z-index: 1000;
+            box-shadow: -2px 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Add some right padding to prevent content from being hidden */
+        .container {
+            padding-right: 350px;
+        }
     </style>
 </head>
 
@@ -43,6 +57,15 @@
         </div>
     </nav>
 
+    <!-- Calendly Widget (Fixed) -->
+    <div id="calendly-widget">
+        <!-- Calendly inline widget begin -->
+        <div class="calendly-inline-widget" data-url="https://calendly.com/tanvirxsaini"
+            style="min-width:320px;height:700px;"></div>
+        <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+        <!-- Calendly inline widget end -->
+    </div>
+
     <!-- Blogging Section -->
     <section id="blog" class="container text-white">
         <div class="section-heading text-center">
@@ -53,86 +76,3 @@
             <!-- Example blog post card -->
             <div class="col-md-4">
                 <div class="card bg-dark text-white mb-4">
-                    <img src="https://via.placeholder.com/350x150" class="card-img-top" alt="Blog Post">
-                    <div class="card-body">
-                        <h5 class="card-title">Blog Post Title</h5>
-                        <p class="card-text">A short description of the blog post...</p>
-                        <a href="#" class="btn btn-primary">Read More</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Repeat similar cards as needed -->
-        </div>
-    </section>
-
-    <!-- Recommended Books Section -->
-    <section id="books" class="container text-white">
-        <div class="section-heading text-center">
-            <h2>Recommended Readings - Books</h2>
-            <p>Books you should definitely check out.</p>
-        </div>
-        <div class="row">
-            <!-- Example book card -->
-            <div class="col-md-4">
-                <div class="card bg-dark text-white mb-4">
-                    <img src="https://via.placeholder.com/350x150" class="card-img-top" alt="Book Cover">
-                    <div class="card-body">
-                        <h5 class="card-title">Book Title</h5>
-                        <p class="card-text">Brief summary or review of the book...</p>
-                        <a href="#" class="btn btn-primary">Learn More</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Repeat similar cards as needed -->
-        </div>
-    </section>
-
-    <!-- Recommended Papers Section -->
-    <section id="papers" class="container text-white">
-        <div class="section-heading text-center">
-            <h2>Recommended Readings - Papers</h2>
-            <p>Academic papers and research articles worth reading.</p>
-        </div>
-        <div class="row">
-            <!-- Example paper card -->
-            <div class="col-md-4">
-                <div class="card bg-dark text-white mb-4">
-                    <img src="https://via.placeholder.com/350x150" class="card-img-top" alt="Paper Cover">
-                    <div class="card-body">
-                        <h5 class="card-title">Paper Title</h5>
-                        <p class="card-text">Abstract or summary of the paper...</p>
-                        <a href="#" class="btn btn-primary">View Paper</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Repeat similar cards as needed -->
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="container text-white">
-        <div class="section-heading text-center">
-            <h2>Projects</h2>
-            <p>Showcase your personal or collaborative projects.</p>
-        </div>
-        <div class="row">
-            <!-- Example project card -->
-            <div class="col-md-4">
-                <div class="card bg-dark text-white mb-4">
-                    <img src="https://via.placeholder.com/350x150" class="card-img-top" alt="Project Image">
-                    <div class="card-body">
-                        <h5 class="card-title">Project Title</h5>
-                        <p class="card-text">Description or overview of the project...</p>
-                        <a href="#" class="btn btn-primary">View Project</a>
-                    </div>
-                </div>
-            </div>
-            <!-- Repeat similar cards as needed -->
-        </div>
-    </section>
-
-    <!-- Bootstrap JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
-</html>
