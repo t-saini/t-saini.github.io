@@ -1,0 +1,7 @@
+- name: scLint
+  url: https://github.com/tanvirsaini/scLint
+  description: Python tool for auto-building AnnData objects from scRNA-seq inputs
+
+- name: DrugRepurposer
+  url: https://github.com/tanvirsaini/drug-repurposer
+  description: ML pipeline for identifying BBB-permeable MT1 ligands

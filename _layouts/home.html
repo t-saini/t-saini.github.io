@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ page.title }}</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Inter&display=swap" rel="stylesheet">
+<style>
+    /* ------------------------------
+       Base Styles and Animation
+    ------------------------------ */
+    body {
+        background: linear-gradient(135deg, #020c1f, #050f33);
+        font-family: 'Inter', sans-serif;
+        color: #ccd6f8;
+        backdrop-filter: blur(4px);
+        animation: flickerBackground 10s infinite alternate;
+    }
+
+    @keyframes flickerBackground {
+        0% {
+            background-position: 0% 50%;
+        }
+
+        100% {
+            background-position: 100% 50%;
+        }
+    }
+
+    body::after {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        background: radial-gradient(ellipse at bottom, rgba(60, 90, 180, 0.15) 0%, transparent 70%),
+            radial-gradient(ellipse at top, rgba(90, 130, 250, 0.08) 0%, transparent 70%);
+        animation: backgroundPulse 12s infinite alternate;
+        z-index: -1;
+    }
+
+    @keyframes backgroundPulse {
+        from {
+            filter: blur(0px);
+            opacity: 0.7;
+        }
+
+        to {
+            filter: blur(3px);
+            opacity: 1;
+        }
+    }
+
+    /* ------------------------------
+       Navbar
+    ------------------------------ */
+    .navbar {
+        background-color: rgba(0, 10, 30, 0.85);
+        border-bottom: 2px solid #5c6be6;
+        box-shadow: 0 0 12px #5c6be6;
+    }
+
+    .navbar-brand {
+        font-family: 'Orbitron', sans-serif;
+        font-size: 1.4rem;
+        color: #94aaff !important;
+    }
+
+    .navbar-brand img,
+    .navbar-brand i {
+        margin: 0 0.25rem;
+    }
+
+    /* ------------------------------
+       Headings
+    ------------------------------ */
+    h2.section-title,
+    #all-posts h2,
+    #projects h2 {
+        font-family: 'Orbitron', sans-serif;
+        text-align: center;
+        color: #7f9dfd;
+        margin-bottom: 2rem;
+        text-shadow: 0 0 8px rgba(127, 157, 253, 0.4);
+    }
+
+    /* ------------------------------
+       Main Latest Post Card
+    ------------------------------ */
+    .main-section .card {
+        border: none !important;
+        box-shadow: none !important;
+        width: 100%;
+        background: linear-gradient(135deg, rgba(10, 15, 35, 0.55), rgba(20, 25, 60, 0.55));
+        backdrop-filter: blur(12px);
+        color: #ccd6f8;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 12px;
+    }
+
+    /* ------------------------------
+       GitHub Project Cards
+    ------------------------------ */
+    #projects .card {
+        background: linear-gradient(135deg, rgba(10, 15, 35, 0.55), rgba(20, 25, 60, 0.55));
+        color: #dee6ff;
+        border: none;
+        box-shadow: 0 0 30px rgba(92, 107, 230, 0.2);
+        backdrop-filter: blur(12px);
+        border-radius: 12px;
+    }
+
+    #projects .card-body {
+        padding: 1.5rem;
+        font-size: 0.95rem;
+    }
+
+    /* ------------------------------
+       Buttons
+    ------------------------------ */
+    .btn-outline-light {
+        border-color: #7f9dfd;
+        color: #7f9dfd;
+        transition: all 0.2s ease;
+    }
+
+    .btn-outline-light:hover {
+        background-color: #7f9dfd;
+        color: #010617;
+        box-shadow: 0 0 8px #7f9dfd;
+    }
+
+    .btn-primary {
+        background-color: #4267ff;
+        border-color: #4267ff;
+        color: white;
+        font-weight: bold;
+    }
+
+    .btn-primary:hover {
+        background-color: #5a76ff;
+        box-shadow: 0 0 10px #5a76ff;
+    }
+
+    /* ------------------------------
+       Cyberpunk Table
+    ------------------------------ */
+    .table-cyberpunk {
+        border-collapse: separate;
+        border-spacing: 0;
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .table-cyberpunk thead th {
+        background-color: rgba(18, 24, 50, 0.9) !important;
+        color: #aabbee !important;
+        border: none !important;
+    }
+
+    .table-cyberpunk th,
+    .table-cyberpunk td {
+        background-color: rgba(12, 18, 40, 0.8) !important;
+        color: #dee6ff !important;
+        border: none !important;
+        vertical-align: middle;
+    }
+
+    .table-cyberpunk tbody tr td {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .table-cyberpunk tbody tr:hover {
+        background-color: rgba(255, 255, 255, 0.02);
+    }
+
+    /* ------------------------------
+       DataTables Search and Select
+    ------------------------------ */
+    .dataTables_wrapper input[type="search"],
+    /* default select styling */
+    .dataTables_wrapper select {
+        background-color: rgba(20, 25, 50, 0.9);
+        color: #ccd6f8;
+        border: 1px solid #5c6be6;
+        border-radius: 6px;
+        padding: 0.35rem 1.25rem 0.35rem 0.5rem;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.9rem;
+        appearance: none;
+        transition: all 0.3s ease;
+        background-image: url("data:image/svg+xml,%3Csvg fill='%23ccd6f8' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 0.5rem center;
+        background-size: 1rem;
+    }
+
+    /* on focus (open state) - no harsh contrast, just a glow */
+    .dataTables_wrapper select:focus {
+        outline: none;
+        background-color: rgba(30, 35, 70, 0.95);
+        border-color: #7f9dfd;
+        box-shadow: 0 0 8px rgba(127, 157, 253, 0.5);
+    }
+
+    /* optional: hover glow effect */
+    .dataTables_wrapper select:hover {
+        border-color: #7f9dfd;
+        box-shadow: 0 0 6px rgba(127, 157, 253, 0.3);
+    }
+    /* ------------------------------
+       DataTables Pagination Buttons (Updated)
+    ------------------------------ */
+    /* remove Bootstrap influence and apply cyberpunk-style pagination */
+    .dataTables_wrapper .dataTables_paginate {
+        margin-top: 1rem;
+        text-align: center;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        all: unset;
+        color: #7f9dfd;
+        font-family: 'Orbitron', monospace;
+        font-size: 1rem;
+        font-weight: 500;
+        margin: 0 0.5rem;
+        cursor: pointer;
+        transition: color 0.2s ease, text-shadow 0.2s ease;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+        color: #ffffff;
+        text-shadow: 0 0 6px #5c6be6;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+        color: #ffffff;
+        font-weight: bold;
+        text-shadow: 0 0 8px #7f9dfd;
+    }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button:focus {
+        outline: none;
+        box-shadow: none;
+    }
+</style>
+
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="{{ '/' | relative_url }}">
+                From pipettes <img src="{{ '/assets/icons/pipette.png' | relative_url }}" alt="pipette icon" width="28">
+                to pipelines <i class="fas fa-project-diagram fa-sm"></i>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Latest Post -->
+    <section class="main-section text-white py-5">
+        <div class="container">
+            {% assign latest_post = site.posts | first %}
+            <div class="card text-white mx-auto w-100 border-0 shadow-none">
+                <div class="card-body">
+                    <h2 class="card-title">{{ latest_post.title }}</h2>
+                    <p class="text-info">{{ latest_post.date | date: "%B %-d, %Y" }}</p>
+                    <p class="card-text">{{ latest_post.excerpt | strip_html | truncatewords: 50 }}</p>
+                    <a href="{{ latest_post.url }}" class="btn btn-outline-light">Continue Reading</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- All Blog Posts Table -->
+    <section id="all-posts" class="my-5 text-white">
+        <div class="container">
+            <h2 class="text-center mb-4">All Blog Posts</h2>
+            <table id="all-posts-table" class="table-cyberpunk">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Date</th>
+                        <th>Summary</th>
+                        <th>Link</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for post in site.posts %}
+                    <tr>
+                        <td>{{ post.title }}</td>
+                        <td>{{ post.date | date: "%b %-d, %Y" }}</td>
+                        <td>{{ post.excerpt | strip_html | truncatewords: 20 }}</td>
+                        <td><a href="{{ post.url }}" class="btn btn-sm btn-outline-light">Read</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- GitHub Projects -->
+    <section id="projects" class="container my-5 text-white">
+        <h2 class="text-center mb-4">Featured GitHub Projects</h2>
+        <div class="row">
+            {% for project in site.data.projects %}
+            <div class="col-md-6">
+                <div class="card text-white mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ project.name }}</h5>
+                        <p class="card-text">{{ project.description }}</p>
+                        <a href="{{ project.url }}" class="btn btn-outline-light">View on GitHub</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $('#all-posts-table').DataTable({
+                paging: true,
+                pageLength: 5,
+                lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+                searching: true,
+                ordering: true,
+                order: [[1, "desc"]],
+                language: {
+                    search: "Search posts:"
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
