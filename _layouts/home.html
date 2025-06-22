@@ -10,254 +10,282 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Inter&display=swap" rel="stylesheet">
-<style>
-    /* ------------------------------
-       Base Styles and Animation
-    ------------------------------ */
-    body {
-        background: linear-gradient(135deg, #020c1f, #050f33);
-        font-family: 'Inter', sans-serif;
-        color: #ccd6f8;
-        backdrop-filter: blur(4px);
-        animation: flickerBackground 10s infinite alternate;
-    }
 
-    @keyframes flickerBackground {
-        0% {
-            background-position: 0% 50%;
+    <style>
+        body {
+            background: linear-gradient(160deg, #0a1b3a, #000000 90%);
+            font-family: 'Inter', sans-serif;
+            color: #ccd6f8;
+            background-attachment: fixed;
+            background-size: 300% 300%;
+            animation: flickerBackground 6s infinite alternate ease-in-out;
         }
 
-        100% {
-            background-position: 100% 50%;
-        }
-    }
+        @keyframes flickerBackground {
+            0% {
+                background-position: 0% 50%;
+            }
 
-    body::after {
-        content: "";
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: none;
-        background: radial-gradient(ellipse at bottom, rgba(60, 90, 180, 0.15) 0%, transparent 70%),
-            radial-gradient(ellipse at top, rgba(90, 130, 250, 0.08) 0%, transparent 70%);
-        animation: backgroundPulse 12s infinite alternate;
-        z-index: -1;
-    }
-
-    @keyframes backgroundPulse {
-        from {
-            filter: blur(0px);
-            opacity: 0.7;
+            100% {
+                background-position: 100% 50%;
+            }
         }
 
-        to {
-            filter: blur(3px);
-            opacity: 1;
+        body::after {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(100, 150, 255, 0.1) 0%, transparent 60%),
+                radial-gradient(circle at 80% 20%, rgba(90, 130, 250, 0.08) 0%, transparent 65%);
+            animation: backgroundPulse 8s infinite ease-in-out alternate;
         }
-    }
 
-    /* ------------------------------
-       Navbar
-    ------------------------------ */
-    .navbar {
-        background-color: rgba(0, 10, 30, 0.85);
-        border-bottom: 2px solid #5c6be6;
-        box-shadow: 0 0 12px #5c6be6;
-    }
+        @keyframes backgroundPulse {
+            0% {
+                filter: blur(2px);
+                opacity: 0.4;
+            }
 
-    .navbar-brand {
-        font-family: 'Orbitron', sans-serif;
-        font-size: 1.4rem;
-        color: #94aaff !important;
-    }
+            100% {
+                filter: blur(4px);
+                opacity: 0.7;
+            }
+        }
 
-    .navbar-brand img,
-    .navbar-brand i {
-        margin: 0 0.25rem;
-    }
+        .navbar {
+            background-color: rgba(0, 10, 30, 0.85);
+            border-bottom: 2px solid #5c6be6;
+            box-shadow: 0 0 12px #5c6be6;
+        }
 
-    /* ------------------------------
-       Headings
-    ------------------------------ */
-    h2.section-title,
-    #all-posts h2,
-    #projects h2 {
-        font-family: 'Orbitron', sans-serif;
-        text-align: center;
-        color: #7f9dfd;
-        margin-bottom: 2rem;
-        text-shadow: 0 0 8px rgba(127, 157, 253, 0.4);
-    }
+        .navbar-brand {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.4rem;
+            color: #94aaff !important;
+        }
 
-    /* ------------------------------
-       Main Latest Post Card
-    ------------------------------ */
-    .main-section .card {
-        border: none !important;
-        box-shadow: none !important;
-        width: 100%;
-        background: linear-gradient(135deg, rgba(10, 15, 35, 0.55), rgba(20, 25, 60, 0.55));
-        backdrop-filter: blur(12px);
-        color: #ccd6f8;
-        margin-left: auto;
-        margin-right: auto;
-        border-radius: 12px;
-    }
+        .navbar-brand img,
+        .navbar-brand i {
+            margin: 0 0.25rem;
+        }
 
-    /* ------------------------------
-       GitHub Project Cards
-    ------------------------------ */
-    #projects .card {
-        background: linear-gradient(135deg, rgba(10, 15, 35, 0.55), rgba(20, 25, 60, 0.55));
-        color: #dee6ff;
-        border: none;
-        box-shadow: 0 0 30px rgba(92, 107, 230, 0.2);
-        backdrop-filter: blur(12px);
-        border-radius: 12px;
-    }
+        h2.section-title,
+        #all-posts h2,
+        #projects h2 {
+            font-family: 'Orbitron', sans-serif;
+            text-align: center;
+            color: #f5f5f7;
+            margin-bottom: 2rem;
+        }
 
-    #projects .card-body {
-        padding: 1.5rem;
-        font-size: 0.95rem;
-    }
+        .main-section .card,
+        #projects .card {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(16px) saturate(160%);
+            -webkit-backdrop-filter: blur(16px) saturate(160%);
+            color: #f5f5f7;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 16px;
+        }
 
-    /* ------------------------------
-       Buttons
-    ------------------------------ */
-    .btn-outline-light {
-        border-color: #7f9dfd;
-        color: #7f9dfd;
-        transition: all 0.2s ease;
-    }
+        .main-section .card:hover,
+        #projects .card:hover {
+            transform: scale(1.015);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        }
 
-    .btn-outline-light:hover {
-        background-color: #7f9dfd;
-        color: #010617;
-        box-shadow: 0 0 8px #7f9dfd;
-    }
+        #projects .card-body {
+            padding: 1.5rem;
+            font-size: 0.95rem;
+        }
 
-    .btn-primary {
-        background-color: #4267ff;
-        border-color: #4267ff;
-        color: white;
-        font-weight: bold;
-    }
+        .table-cyberpunk {
+            font-family: monospace;
+            background-color: rgba(14, 14, 14, 0.85);
+            color: #f5f5f5;
+            border-radius: 10px;
+            padding: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            box-shadow: inset 0 0 0.5px #ffffff, 0 0 10px rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-    .btn-primary:hover {
-        background-color: #5a76ff;
-        box-shadow: 0 0 10px #5a76ff;
-    }
+        .table-cyberpunk:hover {
+            transform: scale(1.01);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+        }
 
-    /* ------------------------------
-       Cyberpunk Table
-    ------------------------------ */
-    .table-cyberpunk {
-        border-collapse: separate;
-        border-spacing: 0;
-        border-radius: 12px;
-        overflow: hidden;
-    }
+        .table-cyberpunk thead th {
+            background-color: transparent;
+            color: #f5f5f5;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+        }
 
-    .table-cyberpunk thead th {
-        background-color: rgba(18, 24, 50, 0.9) !important;
-        color: #aabbee !important;
-        border: none !important;
-    }
+        .table-cyberpunk td {
+            background-color: transparent;
+            color: #ffffff;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
 
-    .table-cyberpunk th,
-    .table-cyberpunk td {
-        background-color: rgba(12, 18, 40, 0.8) !important;
-        color: #dee6ff !important;
-        border: none !important;
-        vertical-align: middle;
-    }
+        .table-cyberpunk tbody tr:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
 
-    .table-cyberpunk tbody tr td {
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
+        div.dataTables_wrapper {
+            padding: 1rem 0;
+        }
 
-    .table-cyberpunk tbody tr:hover {
-        background-color: rgba(255, 255, 255, 0.02);
-    }
+        /* ─── flush layout for controls ─────────────────────────────── */
+        .table-cyberpunk .top-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            padding: 0;
+            background: none;
+            border: none;
+            box-shadow: none;
+        }
 
-    /* ------------------------------
-       DataTables Search and Select
-    ------------------------------ */
-    .dataTables_wrapper input[type="search"],
-    /* default select styling */
-    .dataTables_wrapper select {
-        background-color: rgba(20, 25, 50, 0.9);
-        color: #ccd6f8;
-        border: 1px solid #5c6be6;
-        border-radius: 6px;
-        padding: 0.35rem 1.25rem 0.35rem 0.5rem;
-        font-family: 'Inter', sans-serif;
-        font-size: 0.9rem;
-        appearance: none;
-        transition: all 0.3s ease;
-        background-image: url("data:image/svg+xml,%3Csvg fill='%23ccd6f8' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
-        background-repeat: no-repeat;
-        background-position: right 0.5rem center;
-        background-size: 1rem;
-    }
+        .table-cyberpunk .dataTables_length label,
+        .table-cyberpunk .dataTables_filter label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0;
+            color: #ccd6f8;
+        }
 
-    /* on focus (open state) - no harsh contrast, just a glow */
-    .dataTables_wrapper select:focus {
-        outline: none;
-        background-color: rgba(30, 35, 70, 0.95);
-        border-color: #7f9dfd;
-        box-shadow: 0 0 8px rgba(127, 157, 253, 0.5);
-    }
+        .table-cyberpunk input[type="search"],
+        .table-cyberpunk select {
+            background-color: rgba(30, 30, 30, 0.9);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            padding: 4px 10px;
+            font-family: inherit;
+        }
 
-    /* optional: hover glow effect */
-    .dataTables_wrapper select:hover {
-        border-color: #7f9dfd;
-        box-shadow: 0 0 6px rgba(127, 157, 253, 0.3);
-    }
-    /* ------------------------------
-       DataTables Pagination Buttons (Updated)
-    ------------------------------ */
-    /* remove Bootstrap influence and apply cyberpunk-style pagination */
-    .dataTables_wrapper .dataTables_paginate {
-        margin-top: 1rem;
-        text-align: center;
-    }
+        .table-cyberpunk input[type="search"]:focus,
+        .table-cyberpunk select:focus {
+            box-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+            outline: none;
+        }
 
-    .dataTables_wrapper .dataTables_paginate .paginate_button {
-        all: unset;
-        color: #7f9dfd;
-        font-family: 'Orbitron', monospace;
-        font-size: 1rem;
-        font-weight: 500;
-        margin: 0 0.5rem;
-        cursor: pointer;
-        transition: color 0.2s ease, text-shadow 0.2s ease;
-    }
+        .table-cyberpunk input[type="search"] {
+            min-width: 180px;
+        }
 
-    .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
-        color: #ffffff;
-        text-shadow: 0 0 6px #5c6be6;
-    }
+        /* ─── cyber-styled dropdown ────────────────────────────────── */
+        .table-cyberpunk select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            padding-right: 2.2rem;
+            position: relative;
+            cursor: pointer;
+            background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23ffffff' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 12px 8px;
+        }
 
-    .dataTables_wrapper .dataTables_paginate .paginate_button.current {
-        color: #ffffff;
-        font-weight: bold;
-        text-shadow: 0 0 8px #7f9dfd;
-    }
+        .table-cyberpunk select option {
+            background-color: rgba(30, 30, 30, 0.95);
+            color: #ffffff;
+        }
 
-    .dataTables_wrapper .dataTables_paginate .paginate_button:focus {
-        outline: none;
-        box-shadow: none;
-    }
-</style>
+        .table-cyberpunk select option:hover {
+            background-color: rgba(90, 130, 250, 0.25);
+        }
+
+        .btn-outline-light {
+            border-color: #5ac8fa;
+            color: #5ac8fa;
+            transition: all 0.2s ease;
+        }
+
+        .btn-outline-light:hover {
+            background-color: #5ac8fa;
+            color: #0d0d0d;
+            box-shadow: 0 0 8px #5ac8fa;
+        }
+
+        .btn-primary {
+            background-color: #007aff;
+            border-color: #007aff;
+            color: white;
+            font-weight: bold;
+        }
+
+        .btn-primary:hover {
+            background-color: #339aff;
+            box-shadow: 0 0 10px #339aff;
+        }
+
+        .site-footer {
+            background-color: rgba(5, 10, 25, 0.85);
+            border-top: 1px solid #5c6be6;
+            color: #7f9dfd;
+            font-size: 0.9rem;
+            box-shadow: 0 -2px 10px rgba(92, 107, 230, 0.1);
+        }
+
+        .site-footer a {
+            color: #aabbee;
+            text-decoration: none;
+        }
+
+        .site-footer a:hover {
+            text-shadow: 0 0 5px #94aaff;
+        }
+
+        .footer-icon-link {
+            margin: 0 10px;
+            font-size: 1.25rem;
+            transition: color 0.2s ease;
+        }
+    </style>
+
+
+
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#all-posts-table').DataTable({
+                paging: true,
+                pageLength: 5,
+                lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+                searching: true,
+                ordering: true,
+                order: [[1, "desc"]],
+                language: {
+                    search: "Search posts:",
+                    lengthMenu: "Show _MENU_ entries"
+                },
+                dom: '<"top-controls d-flex justify-content-between align-items-center mb-3"lf>rt<"bottom-controls d-flex justify-content-between mt-3"ip>'
+            });
+        });
+    </script>
 
 </head>
+
 <body>
-    <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <a class="navbar-brand" href="{{ '/' | relative_url }}">
@@ -267,49 +295,50 @@
         </div>
     </nav>
 
-    <!-- Latest Post -->
     <section class="main-section text-white py-5">
         <div class="container">
             {% assign latest_post = site.posts | first %}
-            <div class="card text-white mx-auto w-100 border-0 shadow-none">
+            <div class="card text-white mx-auto w-100 border-0">
                 <div class="card-body">
                     <h2 class="card-title">{{ latest_post.title }}</h2>
                     <p class="text-info">{{ latest_post.date | date: "%B %-d, %Y" }}</p>
-                    <p class="card-text">{{ latest_post.excerpt | strip_html | truncatewords: 50 }}</p>
+                    <p class="card-text">{{ latest_post.excerpt | strip_html | truncatewords: 5 }}</p>
                     <a href="{{ latest_post.url }}" class="btn btn-outline-light">Continue Reading</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- All Blog Posts Table -->
     <section id="all-posts" class="my-5 text-white">
         <div class="container">
             <h2 class="text-center mb-4">All Blog Posts</h2>
-            <table id="all-posts-table" class="table-cyberpunk">
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Date</th>
-                        <th>Summary</th>
-                        <th>Link</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for post in site.posts %}
-                    <tr>
-                        <td>{{ post.title }}</td>
-                        <td>{{ post.date | date: "%b %-d, %Y" }}</td>
-                        <td>{{ post.excerpt | strip_html | truncatewords: 20 }}</td>
-                        <td><a href="{{ post.url }}" class="btn btn-sm btn-outline-light">Read</a></td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+
+            <!-- Cyberpunk container with controls + table inside -->
+            <div class="table-cyberpunk">
+                <table id="all-posts-table" class="w-100">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Date</th>
+                            <th>Summary</th>
+                            <th>Link</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for post in site.posts %}
+                        <tr>
+                            <td>{{ post.title }}</td>
+                            <td>{{ post.date | date: "%b %-d, %Y" }}</td>
+                            <td>{{ post.excerpt | strip_html | truncatewords: 20 }}</td>
+                            <td><a href="{{ post.url }}" class="btn btn-sm btn-outline-light">Read</a></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </section>
 
-    <!-- GitHub Projects -->
     <section id="projects" class="container my-5 text-white">
         <h2 class="text-center mb-4">Featured GitHub Projects</h2>
         <div class="row">
@@ -327,26 +356,26 @@
         </div>
     </section>
 
-    <!-- Scripts -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-
-    <script>
-        $(document).ready(function () {
-            $('#all-posts-table').DataTable({
-                paging: true,
-                pageLength: 5,
-                lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-                searching: true,
-                ordering: true,
-                order: [[1, "desc"]],
-                language: {
-                    search: "Search posts:"
-                }
-            });
-        });
-    </script>
+    <footer class="site-footer text-center mt-5 py-3">
+        <div>
+            <p class="mb-1">
+                &copy; {{ site.time | date: "%Y" }} {{ site.title }} · Powered by
+                <a href="https://jekyllrb.com" target="_blank"><i class="fas fa-gem me-1"></i>Jekyll</a>
+            </p>
+            <p>
+                <a href="https://github.com/{{ site.github_username | strip }}" target="_blank" class="footer-icon-link"
+                    aria-label="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="mailto:{{ site.email }}" class="footer-icon-link" aria-label="Email">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="{{ '/feed.xml' | relative_url }}" class="footer-icon-link" aria-label="RSS">
+                    <i class="fas fa-rss"></i>
+                </a>
+            </p>
+        </div>
+    </footer>
 </body>
 
 </html>
