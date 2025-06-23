@@ -1,0 +1,11 @@
+---
+layout: default
+---
+
+{% include post-styles.html %}
+
+<article class="post-content fade-in-post">
+    <h1>{{ page.title }}</h1>
+    <p class="text-info">{{ page.date | date: "%b %-d, %Y" }}</p>
+    {{ content }}
+</article>

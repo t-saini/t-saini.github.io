@@ -1,0 +1,38 @@
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#all-posts-table').DataTable({
+            paging: true,
+            pageLength: 5,
+            lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+            searching: true,
+            ordering: true,
+            order: [[1, "desc"]],
+            language: {
+                search: "Search posts:",
+                lengthMenu: "Show _MENU_ entries"
+            },
+            dom: '<"top-controls d-flex justify-content-between align-items-center mb-3"lf>rt<"bottom-controls d-flex justify-content-between mt-3"ip>'
+        });
+    });
+</script>
+<script>
+  document.querySelectorAll('a').forEach(link => {
+    if (link.href.includes('/blog/') || link.href.includes('/posts/')) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const homepage = document.getElementById('homepage-content');
+        if (homepage) {
+          homepage.classList.add('fade-out');
+          setTimeout(() => {
+            window.location.href = this.href;
+          }, 600); // match CSS transition duration
+        } else {
+          window.location.href = this.href;
+        }
+      });
+    }
+  });
+</script>

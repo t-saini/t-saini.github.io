@@ -1,4 +1,6 @@
 ---
-layout: home
-title: From Pipettes to Pipelines
+layout: default
+title: Home
 ---
+
+{% include homepage.html %}
