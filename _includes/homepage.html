@@ -1,22 +1,18 @@
-<div id="homepage-content">
-
 <section class="main-section text-white py-5">
     <div class="container">
         {% assign latest_post = site.posts | first %}
-        <div class="card text-white mx-auto w-100 border-0">
-            <div class="card-body">
-                <h2 class="card-title">{{ latest_post.title }}</h2>
-                <p class="text-info">{{ latest_post.date | date: "%B %-d, %Y" }}</p>
-                <p class="card-text">{{ latest_post.excerpt | strip_html | truncatewords: 5 }}</p>
-                <a href="{{ latest_post.url }}" class="btn btn-outline-light">Continue Reading</a>
-            </div>
+        <div class="latest-post-preview mx-auto w-100">
+            <h2 class="mb-2">{{ latest_post.title }}</h2>
+            <p class="text-info mb-2">{{ latest_post.date | date: "%B %-d, %Y" }}</p>
+            <p class="mb-3">{{ latest_post.excerpt | strip_html | truncatewords: 150 }}</p>
+            <a href="{{ latest_post.url }}" class="btn btn-outline-light">Continue Reading</a>
         </div>
     </div>
 </section>
 
 <section id="all-posts" class="my-5 text-white">
     <div class="container">
-        <h2 class="text-center mb-4">All Blog Posts</h2>
+        <h2 class="text-center mb-4">Archives</h2>
 
         <!-- Cyberpunk container with controls + table inside -->
         <div class="table-cyberpunk">
@@ -44,7 +40,7 @@
     </div>
 </section>
 
-<section id="projects" class="container my-5 text-white">
+<section id="projects" class="container my-5 mb-2 text-white">
     <h2 class="text-center mb-4">Featured GitHub Projects</h2>
     <div class="row">
         {% for project in site.data.projects %}
@@ -60,5 +56,3 @@
         {% endfor %}
     </div>
 </section>
-
-</div>

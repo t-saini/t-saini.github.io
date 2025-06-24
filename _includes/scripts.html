@@ -1,37 +1,63 @@
+<!-- jQuery + DataTables -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<!-- DataTables for All Posts Table -->
 <script>
-    $(document).ready(function () {
-        $('#all-posts-table').DataTable({
-            paging: true,
-            pageLength: 5,
-            lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-            searching: true,
-            ordering: true,
-            order: [[1, "desc"]],
-            language: {
-                search: "Search posts:",
-                lengthMenu: "Show _MENU_ entries"
-            },
-            dom: '<"top-controls d-flex justify-content-between align-items-center mb-3"lf>rt<"bottom-controls d-flex justify-content-between mt-3"ip>'
-        });
+  $(document).ready(function () {
+    $('#all-posts-table').DataTable({
+      paging: true,
+      pageLength: 5,
+      lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+      searching: true,
+      ordering: true,
+      order: [[1, "desc"]],
+      language: {
+        search: "Search posts:",
+        lengthMenu: "Show _MENU_ entries"
+      },
+      dom: '<"top-controls d-flex justify-content-between align-items-center mb-3"lf>rt<"bottom-controls d-flex justify-content-between mt-3"ip>'
     });
+
+    $('#blogTable').DataTable({
+      pageLength: 50,
+      responsive: true
+    });
+  });
 </script>
+
+<!-- Fade in on Page Load -->
 <script>
-  document.querySelectorAll('a').forEach(link => {
-    if (link.href.includes('/blog/') || link.href.includes('/posts/')) {
-      link.addEventListener('click', function(e) {
+  window.addEventListener("DOMContentLoaded", () => {
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        document.body.classList.add("page-loaded");
+        window.scrollTo(0, 0);
+      }, 50); // small delay ensures transition kicks in visually
+    });
+  });
+
+</script>
+
+<!-- Fade Out on Internal Navigation (excluding external, downloads, new tabs) -->
+<script>
+  document.querySelectorAll('a[href]').forEach(link => {
+    const url = new URL(link.href, window.location.href);
+    const isSameSite = url.origin === window.location.origin;
+
+    if (isSameSite && !link.hasAttribute('download') && !link.target) {
+      link.addEventListener('click', function (e) {
+        if (e.metaKey || e.ctrlKey) return;
+
         e.preventDefault();
-        const homepage = document.getElementById('homepage-content');
-        if (homepage) {
-          homepage.classList.add('fade-out');
-          setTimeout(() => {
-            window.location.href = this.href;
-          }, 600); // match CSS transition duration
-        } else {
+        document.body.classList.remove('page-loaded');
+        const wrapper = document.querySelector('.fade-wrapper');
+        if (wrapper) wrapper.classList.add('page-fade-out');
+
+        setTimeout(() => {
           window.location.href = this.href;
-        }
+        }, 500);
       });
     }
   });

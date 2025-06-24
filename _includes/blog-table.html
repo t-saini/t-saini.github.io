@@ -1,0 +1,25 @@
+<br />
+<br />
+
+<div class="terminal-section">
+    <table id="blogTable" class="display terminal-table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Date</th>
+                <th>Summary</th>
+                <th>Link</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for post in site.posts %}
+            <tr>
+                <td>{{ post.title }}</td>
+                <td>{{ post.date | date: "%b %d, %Y" }}</td>
+                <td style="white-space: pre-line;">{{ post.excerpt | strip_html | truncate: 500 }}</td>
+                <td><a href="{{ post.url | relative_url }}" class="btn">Read</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

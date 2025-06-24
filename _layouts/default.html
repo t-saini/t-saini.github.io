@@ -15,17 +15,19 @@
   {% include styles.html %}
 </head>
 
-<body>
-
+<body class="d-flex flex-column min-vh-100">
   {% include navbar.html %}
 
-  <main>
-    {{ content }}
-  </main>
+  <div class="page-wrapper flex-fill d-flex flex-column">
+    <main class="flex-grow-1">
+      {{ content }}
+    </main>
+  
+    {% include footer.html %}
+  </div>
 
-  {% include footer.html %}
 
-  {% include scripts.html %}
+    {% include scripts.html %}
 </body>
 
 </html>
